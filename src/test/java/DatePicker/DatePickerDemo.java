@@ -1,4 +1,4 @@
-package AutomateDatePicker;
+package DatePicker;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
-public class DatePickerDemo1 {
+public class DatePickerDemo {
     public static void main(String[] args) throws InterruptedException {
         String month = "June 2024";
         String day = "20";
