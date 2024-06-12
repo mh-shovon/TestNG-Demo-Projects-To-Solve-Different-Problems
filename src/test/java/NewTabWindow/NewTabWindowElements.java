@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class NewTabWindowElements {
     public static void main(String[] args) throws InterruptedException {
+        /* <----- Method:1 -----> */
         WebDriver driver;
         driver = new ChromeDriver();
         //driver.manage().window().maximize();
