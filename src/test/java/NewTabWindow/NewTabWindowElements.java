@@ -23,7 +23,7 @@ public class NewTabWindowElements {
         driver.get("https://www.youtube.com");
         Thread.sleep(3000);
 
-        driver.switchTo().window(newTab.get(0));
+        driver.switchTo().window(newTab.get(2));
         driver.get("https://www.facebook.com");
         Thread.sleep(3000);
     }
