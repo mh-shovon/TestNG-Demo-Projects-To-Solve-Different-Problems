@@ -1,43 +1,30 @@
 package NewTabWindow;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.util.Set;
+import java.util.ArrayList;
 
-public class NewTabWindowElements extends Setup{
-    public NewTabWindowElements(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+public class NewTabWindowElements {
+    public static void main(String[] args) throws InterruptedException {
+        WebDriver driver;
+        driver = new ChromeDriver();
+        //driver.manage().window().maximize();
+
+        driver.navigate().to("https://www.google.com");
+
+        Thread.sleep(2000);
+        ((JavascriptExecutor)driver).executeScript("window.open()");
+
+        ArrayList<String> newTab = new ArrayList<>(driver.getWindowHandles());
+
+        driver.switchTo().window(newTab.get(1));
+        driver.get("https://www.youtube.com");
+        Thread.sleep(3000);
+
+        driver.switchTo().window(newTab.get(0));
+        driver.get("https://www.facebook.com");
+        Thread.sleep(3000);
     }
-
-    public void isLogoDisplayed() {
-        WebElement isLogoDisplayed = driver.findElement(By.xpath("//*[@id=\"topActionHeader\"]/div/div[2]/div/div[1]/a/img"));
-        if(isLogoDisplayed.isDisplayed()) {
-            System.out.println("Test Case Passed.");
-        } else {
-            System.out.println("Test Case Failed. Bug found");
-        }
-    }
-    public void newTabOrWindow() {
-        WebElement loginIcon = driver.findElements(By.className("login-icon")).get(0);
-        loginIcon.click();
-        String mainWindow = driver.getWindowHandle();
-        Set<String> windowHandles = driver.getWindowHandles();
-        for (String childWindow : windowHandles) {
-            if (!mainWindow.equalsIgnoreCase(childWindow)) {
-                driver.switchTo().window(childWindow);
-                try {
-                    Thread.sleep(1000); // Sleep for 1 second
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println(driver.getTitle());
-            }
-        }
-        driver.switchTo().window(mainWindow);
-        System.out.println(driver.getTitle());
-    }
-
 }
